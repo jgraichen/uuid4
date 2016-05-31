@@ -105,7 +105,7 @@ class UUID4
     end
 
     def valid_int?(int)
-      int.to_s(16) =~ Formatter::Compact::REGEXP
+      int.to_s(16).rjust(32, '0') =~ Formatter::Compact::REGEXP
     end
   end
 end

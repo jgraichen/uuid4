@@ -38,6 +38,11 @@ describe UUID4 do
     context 'with base62 string' do
       let(:value) { uuid_b62 }
       it { expect(subject.to_str).to eq uuid_str }
+
+      context 'with shorter base62 string' do
+        let(:value) { '1vGiOCdOqnKYhO' }
+        it { is_expected.to eq '00000000-0000-4000-b000-000000000000' }
+      end
     end
 
     context 'with urn string' do
