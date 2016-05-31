@@ -114,4 +114,8 @@ module Kernel
   def UUID4(value)
     UUID4.new(value)
   end
+
+  def UUID(value)
+    UUID4.new(value)
+  end
 end

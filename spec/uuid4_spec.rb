@@ -188,4 +188,16 @@ describe UUID4 do
       it { is_expected.to be_falsy }
     end
   end
+
+  describe 'Kernel#UUID4' do
+    subject { UUID4(uuid_str) }
+    it { is_expected.to be_a UUID4 }
+    it { is_expected.to eq uuid }
+  end
+
+  describe 'Kernel#UUID' do
+    subject { UUID(uuid_str) }
+    it { is_expected.to be_a UUID4 }
+    it { is_expected.to eq uuid }
+  end
 end
