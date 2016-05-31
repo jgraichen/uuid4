@@ -104,17 +104,6 @@ class UUID4
       nil
     end
 
-    def _parse_str(str)
-      if str =~ UUID_STRING
-        str.tr('-', '').hex
-      elsif str =~ UUID_BASE62
-        require 'base62-rb'
-        Base62.decode(str)
-      else
-        false
-      end
-    end
-
     def valid_int?(int)
       int.to_s(16) =~ Formatter::Compact::REGEXP
     end
