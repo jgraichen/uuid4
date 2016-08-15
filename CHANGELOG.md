@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 1.2.1
 
 * Improve `#as_json` compatibility by swallowing arbitrary arguments passed by encoders.
 
