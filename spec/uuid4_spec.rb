@@ -165,6 +165,18 @@ describe UUID4 do
       subject { ::ActiveSupport::JSON.encode(uuid) }
       it { is_expected.to eq uuid.to_s.inspect }
     end
+
+    context 'with additional arguments' do
+      describe '#as_json' do
+        subject { uuid.as_json(a: 1, b: 2) }
+        it { is_expected.to eq uuid.to_s }
+      end
+
+      describe '::ActiveSupport::JSON.encode' do
+        subject { ::ActiveSupport::JSON.encode(uuid, mode: :bla) }
+        it { is_expected.to eq uuid.to_s.inspect }
+      end
+    end
   end
 
   describe 'Numeric#==' do

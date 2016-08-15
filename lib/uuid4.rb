@@ -45,7 +45,10 @@ class UUID4
 
   alias_method :to_s, :to_str
   alias_method :to_uuid, :to_str
-  alias_method :as_json, :to_str
+
+  def as_json(*)
+    to_str
+  end
 
   def to_uuid4
     self
