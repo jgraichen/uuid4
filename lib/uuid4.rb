@@ -100,12 +100,10 @@ class UUID4
         return value
       end
 
-      FORMATTERS.each do |formatter|
-        val = formatter.decode(value) if formatter.respond_to?(:decode)
-        return val if val
-      end
-
-      nil
+      # Return the result of the first formatter that can decode this value
+      FORMATTERS.lazy.map { |formatter|
+        formatter.decode(value) if formatter.respond_to?(:decode)
+      }.find(&:itself)
     end
 
     def valid_int?(int)
