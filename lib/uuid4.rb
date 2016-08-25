@@ -95,17 +95,22 @@ class UUID4
       end
     end
 
+    def valid?(value)
+      new(value)
+      true
+    rescue TypeError
+      false
+    end
+
     def _parse(value)
       if value.respond_to?(:to_int) && valid_int?(value = value.to_int)
         return value
       end
 
-      FORMATTERS.each do |formatter|
-        val = formatter.decode(value) if formatter.respond_to?(:decode)
-        return val if val
-      end
-
-      nil
+      # Return the result of the first formatter that can decode this value
+      FORMATTERS.lazy.map { |formatter|
+        formatter.decode(value) if formatter.respond_to?(:decode)
+      }.find(&:itself)
     end
 
     def valid_int?(int)
