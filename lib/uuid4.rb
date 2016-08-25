@@ -95,6 +95,13 @@ class UUID4
       end
     end
 
+    def valid?(value)
+      new(value)
+      true
+    rescue TypeError
+      false
+    end
+
     def _parse(value)
       if value.respond_to?(:to_int) && valid_int?(value = value.to_int)
         return value

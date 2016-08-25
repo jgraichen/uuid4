@@ -51,6 +51,45 @@ describe UUID4 do
     end
   end
 
+  describe '#valid?' do
+    subject { UUID4.valid?(value) }
+
+    context 'with string' do
+      let(:value) { uuid_str }
+      it { is_expected.to be_truthy }
+    end
+
+    context 'with compact string' do
+      let(:value) { uuid_cmp }
+      it { is_expected.to be_truthy }
+    end
+
+    context 'with integer' do
+      let(:value) { uuid_int }
+      it { is_expected.to be_truthy }
+    end
+
+    context 'with base62 string' do
+      let(:value) { uuid_b62 }
+      it { is_expected.to be_truthy }
+
+      context 'with shorter base62 string' do
+        let(:value) { '1vGiOCdOqnKYhO' }
+        it { is_expected.to be_truthy }
+      end
+    end
+
+    context 'with urn string' do
+      let(:value) { uuid_urn }
+      it { is_expected.to be_truthy }
+    end
+
+    context 'with random string' do
+      let(:value) { 'abcde' }
+      it { is_expected.to be_falsy }
+    end
+  end
+
   describe '#to_s' do
     subject { uuid.to_s }
     it { is_expected.to be_a String }
