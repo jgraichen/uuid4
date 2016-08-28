@@ -347,4 +347,25 @@ describe UUID4 do
     it { is_expected.to be_a UUID4 }
     it { is_expected.to eq uuid }
   end
+
+  describe 'eql?' do
+    subject { uuid }
+    it { is_expected.to eql UUID(uuid_str) }
+  end
+
+  describe 'hash' do
+    subject { uuid.hash }
+    it { is_expected.to equal UUID(uuid_str).hash }
+  end
+
+  describe 'hash equality' do
+    let(:object) { Object.new }
+    subject { { uuid => object } }
+
+    it { is_expected.to have_key uuid }
+    it { is_expected.to have_key UUID(uuid_str) }
+    it { is_expected.to include uuid }
+    it { is_expected.to include UUID(uuid_str) }
+    it { expect(subject[uuid]).to equal object }
+  end
 end

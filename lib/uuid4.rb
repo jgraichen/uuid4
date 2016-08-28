@@ -60,6 +60,14 @@ class UUID4
 
   alias_method :to_i, :to_int
 
+  def hash
+    @value.hash
+  end
+
+  def eql?(object)
+    object.is_a?(::UUID4) && object.hash === hash
+  end
+
   def inspect
     "<UUID4:#{to_s}>"
   end
