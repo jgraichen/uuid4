@@ -1,9 +1,13 @@
 # Changelog
 
+## 1.3.1
+
+* Fix incompatibility with Rubies <2.2 introduced in #1
+
 ## 1.3.0
 
 * Add `UUID#hash` and `UUID#eql?` for using UUIDs e.g. as hash keys
-* Add `UUID.try_convert` returning a UUID or `nil`.
+* Add `UUID.try_convert` returning a UUID or `nil`
 * Add `UUID.valid?` to validate objects as UUIDs (#1)
 
 ## 1.2.1
