@@ -125,7 +125,7 @@ class UUID4
         # Return the result of the first formatter that can decode this value
         FORMATTERS.lazy.map { |formatter|
           formatter.decode(value) if formatter.respond_to?(:decode)
-        }.find(&:itself)
+        }.find {|value| !value.nil? }
       end
     end
 
