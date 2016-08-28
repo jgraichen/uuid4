@@ -2,6 +2,8 @@
 
 ## Next
 
+* Add `UUID#hash` and `UUID#eql?` for using UUIDs e.g. as hash keys
+* Add `UUID.try_convert` returning a UUID or `nil`.
 * Add `UUID.valid?` to validate objects as UUIDs (#1)
 
 ## 1.2.1
