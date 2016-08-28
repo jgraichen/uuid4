@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 1.3.0
 
 * Add `UUID#hash` and `UUID#eql?` for using UUIDs e.g. as hash keys
 * Add `UUID.try_convert` returning a UUID or `nil`.
