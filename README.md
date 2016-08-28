@@ -1,6 +1,6 @@
 # UUID4
 
-[![Build Status](https://travis-ci.org/jgraichen/uuid4.svg?branch=master)](https://travis-ci.org/jgraichen/uuid4)
+[![Build Status](https://travis-ci.org/jgraichen/uuid4.svg?branch=master)](https://travis-ci.org/jgraichen/uuid4) [![Dependency Status](https://gemnasium.com/badges/github.com/jgraichen/uuid4.svg)](https://gemnasium.com/github.com/jgraichen/uuid4) [![Gem](https://img.shields.io/gem/v/uuid4.svg)](https://rubygems.org/gems/uuid4) [![license](https://img.shields.io/github/license/jgraichen/uuid4.svg)](https://github.com/jgraichen/uuid4/blob/master/LICENSE.txt)
 
 A UUID support library specialized on v4 UUIDs, parsing and formatting existing UUIDs. It can encode and decode dashed UUIDs, compact UUIDs, large integers, UUID URNs and Base62 coded UUIDs.
 
