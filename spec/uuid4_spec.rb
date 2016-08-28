@@ -51,6 +51,81 @@ describe UUID4 do
     end
   end
 
+  describe '.try_convert' do
+    subject { UUID4.try_convert(value) }
+
+    context 'with nil' do
+      let(:value) { nil }
+      it { expect(subject).to be_nil }
+    end
+
+    context 'with UUID' do
+      let(:value) { uuid }
+      it { expect(subject).to equal uuid }
+    end
+
+    context 'with object responding to #to_uuid4' do
+      context 'returning a UUID object' do
+        let(:value) do
+          Object.new.tap do |o|
+            def o.to_uuid4
+              UUID4('6Cd11GvqKza4R2wbYNurfi')
+            end
+          end
+        end
+
+        it { is_expected.to be_a ::UUID4 }
+        it { expect(subject.to_str).to eq uuid_str }
+      end
+    end
+
+    context 'with string' do
+      let(:value) { uuid_str }
+      it { is_expected.to be_a ::UUID4 }
+      it { expect(subject.to_str).to eq uuid_str }
+    end
+
+    context 'with compact string' do
+      let(:value) { uuid_cmp }
+      it { is_expected.to be_a ::UUID4 }
+      it { expect(subject.to_str).to eq uuid_str }
+    end
+
+    context 'with integer' do
+      let(:value) { uuid_int }
+      it { is_expected.to be_a ::UUID4 }
+      it { expect(subject.to_str).to eq uuid_str }
+    end
+
+    context 'with base62 string' do
+      let(:value) { uuid_b62 }
+      it { is_expected.to be_a ::UUID4 }
+      it { expect(subject.to_str).to eq uuid_str }
+
+      context 'with shorter base62 string' do
+        let(:value) { '1vGiOCdOqnKYhO' }
+        it { is_expected.to be_a ::UUID4 }
+        it { is_expected.to eq '00000000-0000-4000-b000-000000000000' }
+      end
+    end
+
+    context 'with urn string' do
+      let(:value) { uuid_urn }
+      it { is_expected.to be_a ::UUID4 }
+      it { expect(subject.to_str).to eq uuid_str }
+    end
+
+    context 'with invalid integer' do
+      let(:value) { 565 }
+      it { expect(subject).to be_nil }
+    end
+
+    context 'with invalid string' do
+      let(:value) { 'fh47df7ffj398' }
+      it { expect(subject).to be_nil }
+    end
+  end
+
   describe '#valid?' do
     subject { UUID4.valid?(value) }
 

@@ -95,6 +95,16 @@ class UUID4
       end
     end
 
+    def try_convert(value)
+      if value.nil? || value.is_a?(UUID4)
+        value
+      elsif value.respond_to?(:to_uuid4)
+        value.to_uuid4
+      elsif (value = _parse(value))
+        new value
+      end
+    end
+
     def valid?(value)
       new(value)
       true
