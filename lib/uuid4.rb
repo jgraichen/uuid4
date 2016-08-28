@@ -87,48 +87,46 @@ class UUID4
   attr_reader :value
 
   class << self
+    alias _new new
+    private :_new
+
     def new(value = nil)
       if value.nil?
         super(SecureRandom.uuid.tr('-', '').hex)
-      elsif value.is_a?(UUID4)
+      elsif (value = try_convert(value))
         value
-      elsif value.respond_to?(:to_uuid4)
-        value.to_uuid4
-      elsif value.respond_to?(:to_int) && valid_int?(value = value.to_int)
-        super(value)
-      elsif (ret = _parse(value))
-        super(ret)
       else
         raise TypeError.new "Invalid UUID: #{value.inspect}"
       end
     end
 
     def try_convert(value)
-      if value.nil? || value.is_a?(UUID4)
+      if value.nil? || value.is_a?(::UUID4)
         value
       elsif value.respond_to?(:to_uuid4)
         value.to_uuid4
       elsif (value = _parse(value))
-        new value
+        _new value
       end
     end
 
     def valid?(value)
-      new(value)
-      true
-    rescue TypeError
-      false
+      if value.is_a?(::UUID4)
+        true
+      else
+        !try_convert(value).nil?
+      end
     end
 
     def _parse(value)
       if value.respond_to?(:to_int) && valid_int?(value = value.to_int)
-        return value
+        value
+      else
+        # Return the result of the first formatter that can decode this value
+        FORMATTERS.lazy.map { |formatter|
+          formatter.decode(value) if formatter.respond_to?(:decode)
+        }.find(&:itself)
       end
-
-      # Return the result of the first formatter that can decode this value
-      FORMATTERS.lazy.map { |formatter|
-        formatter.decode(value) if formatter.respond_to?(:decode)
-      }.find(&:itself)
     end
 
     def valid_int?(int)
