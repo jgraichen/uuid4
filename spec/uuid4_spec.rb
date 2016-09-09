@@ -120,8 +120,13 @@ describe UUID4 do
       it { expect(subject).to be_nil }
     end
 
-    context 'with invalid string' do
+    context 'with invalid string (I)' do
       let(:value) { 'fh47df7ffj398' }
+      it { expect(subject).to be_nil }
+    end
+
+    context 'with invalid string (II)' do
+      let(:value) { 'abcdefg_ijkl6574mno' }
       it { expect(subject).to be_nil }
     end
   end
