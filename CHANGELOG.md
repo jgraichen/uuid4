@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.2
+
+* Fix issue when parsing UUIDs (5e47b00)
+
 ## 1.3.1
 
 * Fix incompatibility with Rubies <2.2 introduced in #1
