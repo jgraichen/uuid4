@@ -49,6 +49,16 @@ describe UUID4 do
       let(:value) { uuid_urn }
       it { expect(subject.to_str).to eq uuid_str }
     end
+
+    context 'with invalid string' do
+      let(:value) { 'this-is-not-a-uuid' }
+
+      it 'raises an error' do
+        expect { subject }.to raise_error(TypeError) do |err|
+          expect(err.message).to include(value)
+        end
+      end
+    end
   end
 
   describe '.try_convert' do

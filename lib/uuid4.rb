@@ -93,8 +93,8 @@ class UUID4
     def new(value = nil)
       if value.nil?
         super(SecureRandom.uuid.tr('-', '').hex)
-      elsif (value = try_convert(value))
-        value
+      elsif (uuid = try_convert(value))
+        uuid
       else
         raise TypeError.new "Invalid UUID: #{value.inspect}"
       end
