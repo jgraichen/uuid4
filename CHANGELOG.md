@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.3
+
+* Fix error message on type errors (#4)
+
 ## 1.3.2
 
 * Fix issue when parsing UUIDs (5e47b00)
