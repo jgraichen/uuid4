@@ -4,5 +4,6 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'activesupport'
+gem 'rake-release', '~> 1.2'
 gem 'rake'
 gem 'rspec', '~> 3.0'
