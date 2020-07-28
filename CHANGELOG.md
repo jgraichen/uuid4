@@ -1,4 +1,19 @@
-# Changelog
+# CHANGELOG
+
+All notable changes to this project will be documented in this file.
+This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Changelog](http://keepachangelog.com/).
+
+## Unreleased
+---
+
+### New
+
+### Changes
+
+### Fixes
+* Consider newlines when checking base62 format (#5)
+
+### Breaks
 
 ## 1.3.3
 
