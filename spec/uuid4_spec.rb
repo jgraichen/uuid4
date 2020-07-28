@@ -139,6 +139,11 @@ describe UUID4 do
       let(:value) { 'abcdefg_ijkl6574mno' }
       it { expect(subject).to be_nil }
     end
+
+    context 'with invalid base62 string (valid + newline)' do
+      let(:value) { "mainframes2018\nmumbojumbo" }
+      it { is_expected.to be_nil }
+    end
   end
 
   describe '#valid?' do

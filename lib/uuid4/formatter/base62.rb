@@ -3,7 +3,7 @@ require 'base62-rb'
 class UUID4
   module Formatter
     class Base62
-      REGEXP = /^[0-9A-Za-z]{14,22}$/
+      REGEXP = /\A[0-9A-Za-z]{14,22}\z/
 
       def encode(uuid)
         ::Base62.encode(uuid.to_i)
