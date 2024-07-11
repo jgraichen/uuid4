@@ -1,0 +1,16 @@
+# .rubocop.yml
+
+inherit_gem:
+  rubocop-config: default.yml
+
+AllCops:
+  TargetRubyVersion: 2.7
+  SuggestExtensions: False
+  NewCops: enable
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+RSpec/NamedSubject:
+  Enabled: false
+RSpec/NestedGroups:
+  Enabled: false

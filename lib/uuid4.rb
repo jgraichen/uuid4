@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'uuid4/version'
 
 class UUID4
@@ -12,18 +14,20 @@ class UUID4
     Formatter::Default.new,
     Formatter::Compact.new,
     Formatter::URN.new,
-    Formatter::Base62.new
-  ]
+    Formatter::Base62.new,
+  ].freeze
 
   def initialize(value)
     @value = value
   end
 
   def ==(other)
+    # rubocop:disable Style/CaseEquality
     return value === other.to_i if other.is_a?(UUID4)
     return other.to_uuid4 == self if other.respond_to?(:to_uuid4)
 
     self.class._parse(other) === value
+    # rubocop:enable Style/CaseEquality
   end
 
   def to_str(format: :default, formatter: nil)
@@ -37,14 +41,14 @@ class UUID4
       when :base62
         formatter = FORMATTERS[3]
       else
-        raise RuntimeError.new("Unknown format: #{format}")
+        raise "Unknown format: #{format}"
     end
 
     formatter.encode(self)
   end
 
-  alias_method :to_s, :to_str
-  alias_method :to_uuid, :to_str
+  alias to_s to_str
+  alias to_uuid to_str
 
   def as_json(*)
     to_str
@@ -58,18 +62,20 @@ class UUID4
     @value
   end
 
-  alias_method :to_i, :to_int
+  alias to_i to_int
 
   def hash
     @value.hash
   end
 
-  def eql?(object)
-    object.is_a?(::UUID4) && object.hash === hash
+  def eql?(other)
+    # rubocop:disable Style/CaseEquality
+    other.is_a?(::UUID4) && other.hash === hash
+    # rubocop:enable Style/CaseEquality
   end
 
   def inspect
-    "<UUID4:#{to_s}>"
+    "<UUID4:#{self}>"
   end
 
   def components
@@ -78,7 +84,7 @@ class UUID4
       (value >> 80) & 0xFFFF,
       (value >> 64) & 0xFFFF,
       (value >> 48) & 0xFFFF,
-      (value >> 0)  & 0xFFFFFFFFFFFF
+      (value >> 0)  & 0xFFFFFFFFFFFF,
     ]
   end
 
@@ -123,9 +129,9 @@ class UUID4
         value
       else
         # Return the result of the first formatter that can decode this value
-        FORMATTERS.lazy.map { |formatter|
+        FORMATTERS.lazy.map do |formatter|
           formatter.decode(value) if formatter.respond_to?(:decode)
-        }.find {|value| !value.nil? }
+        end.find {|value| !value.nil? } # rubocop:disable Style/MultilineBlockChain
       end
     end
 
@@ -136,11 +142,11 @@ class UUID4
 end
 
 module Kernel
-  def UUID4(value)
+  def UUID4(value) # rubocop:disable Naming/MethodName
     UUID4.new(value)
   end
 
-  def UUID(value)
+  def UUID(value) # rubocop:disable Naming/MethodName
     UUID4.new(value)
   end
 end

@@ -1,7 +1,9 @@
-require "rake/release/task"
-require "rspec/core/rake_task"
+# frozen_string_literal: true
 
-task :default => :spec
+require 'rake/release/task'
+require 'rspec/core/rake_task'
+
+task default: :spec
 
 RSpec::Core::RakeTask.new(:spec)
 
