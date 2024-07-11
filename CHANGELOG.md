@@ -9,17 +9,19 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 
 ### New
 
-- Accept UUID v6/7/8 for parsing
-
 ### Changes
 
 ### Fixes
 
 ### Breaks
 
-## 1.3.4 - (2020-07-28)
+## 1.4.0 - (2024-07-11)
 
----
+### New
+
+- Accept UUID v6/7/8 for parsing
+
+## 1.3.4 - (2020-07-28)
 
 ### Fixes
 

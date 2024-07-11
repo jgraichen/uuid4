@@ -3,8 +3,8 @@
 class UUID4
   module VERSION
     MAJOR = 1
-    MINOR = 3
-    PATCH = 4
+    MINOR = 4
+    PATCH = 0
     STAGE = nil
     STRING = [MAJOR, MINOR, PATCH, STAGE].compact.join('.')
 
