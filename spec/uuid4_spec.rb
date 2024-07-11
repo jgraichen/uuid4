@@ -8,6 +8,11 @@ describe UUID4 do
   let(:uuid_b62) { '6Cd11GvqKza4R2wbYNurfi' }
   let(:uuid)     { UUID4.new(uuid_int) }
 
+  let(:uuid7_str) { '0190a253-ff1b-728d-aa49-e5e066a1ade9' }
+  let(:uuid7_urn) { 'urn:uuid:0190a253-ff1b-728d-aa49-e5e066a1ade9' }
+  let(:uuid7_cmp) { '0190a253ff1b728daa49e5e066a1ade9' }
+  let(:uuid7) { UUID4.new(uuid7_str) }
+
   it 'has a version number' do
     expect(UUID4::VERSION).not_to be nil
   end
@@ -57,6 +62,23 @@ describe UUID4 do
         expect { subject }.to raise_error(TypeError) do |err|
           expect(err.message).to include(value)
         end
+      end
+    end
+
+    context 'UUIDv7' do
+      context 'with string' do
+        let(:value) { uuid7_str }
+        it { expect(subject).to eq uuid7 }
+      end
+
+      context 'with compact string' do
+        let(:value) { uuid7_cmp }
+        it { expect(subject).to eq uuid7 }
+      end
+
+      context 'with urn string' do
+        let(:value) { uuid7_urn }
+        it { expect(subject).to eq uuid7 }
       end
     end
   end
@@ -182,6 +204,16 @@ describe UUID4 do
     context 'with random string' do
       let(:value) { 'abcde' }
       it { is_expected.to be_falsy }
+    end
+
+    context 'with UUIDv7 string' do
+      let(:value) { '0190a253-ff1b-728d-aa49-e5e066a1ade9' }
+      it { is_expected.to be_truthy }
+    end
+
+    context 'with UUIDv8 string' do
+      let(:value) { '0190a253-ff1b-828d-aa49-e5e066a1ade9' }
+      it { is_expected.to be_truthy }
     end
   end
 
