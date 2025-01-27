@@ -10,4 +10,4 @@ gem 'rake'
 gem 'rake-release', '~> 1.2'
 gem 'rspec', '~> 3.0'
 
-gem 'rubocop-config', github: 'jgraichen/rubocop-config', ref: '7011bc14dbbf46e9bb240403feef25f7f6bb8dd3', require: false
+gem 'rubocop-config', github: 'jgraichen/rubocop-config', ref: '9f3e5cd0e519811a7f615f265fca81a4f4e843b9', require: false
