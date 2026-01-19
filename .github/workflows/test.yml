@@ -45,7 +45,7 @@ jobs:
       - uses: actions/checkout@master
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "4.0.0"
+          ruby-version: "4.0.1"
           bundler-cache: true
         env:
           BUNDLE_WITHOUT: development
